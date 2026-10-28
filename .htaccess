@@ -1,0 +1,14 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # The root URL remains usable in XAMPP while internal Laravel files stay private.
+    RewriteRule ^(?:app|bootstrap|config|database|resources|routes|storage|tests|vendor|\.laravel-scaffold)(?:/|$) - [F,L,NC]
+    RewriteRule (^|/)\. - [F,L]
+    RewriteRule ^(?:artisan|composer\.(?:json|lock)|phpunit\.xml|README\.md)$ - [F,L,NC]
+    RewriteRule ^(?:css|js|images|uploads)/.*$ public/$0 [L]
+    RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>
